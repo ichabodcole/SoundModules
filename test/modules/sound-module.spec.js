@@ -1,4 +1,5 @@
-import { SoundModule, SoundModuleEvent } from '../../lib/modules/sound-module';
+import { ModuleEvents, ModuleStates } from '../../lib/constants';
+import { SoundModule } from '../../lib/modules/sound-module';
 
 describe ('SoundModule', function () {
     var sm, options, audioContext;
@@ -117,13 +118,13 @@ describe ('SoundModule', function () {
             it('should emit a START event', function() {
                 spyOn(sm,'emit');
                 sm.start();
-                expect(sm.emit).toHaveBeenCalledWith(SoundModuleEvent.START);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.START);
             });
 
             it('should set the state property to ACTIVE', function() {
                 sm.start();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(SoundModule.ACTIVE);
+                expect(sm.state).toBe(ModuleStates.ACTIVE);
             });
         });
 
@@ -131,13 +132,13 @@ describe ('SoundModule', function () {
             it('should emit a STOP event', function() {
                 spyOn(sm,'emit');
                 sm.stop();
-                expect(sm.emit).toHaveBeenCalledWith(SoundModuleEvent.STOP);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.STOP);
             });
 
             it('should set the state property to STOPPED', function() {
                 sm.stop();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(SoundModule.STOPPED);
+                expect(sm.state).toBe(ModuleStates.STOPPED);
             });
         });
 
@@ -151,7 +152,7 @@ describe ('SoundModule', function () {
             it('should emit a CONNECT event', function() {
                 spyOn(sm,'emit');
                 sm.connect({});
-                expect(sm.emit).toHaveBeenCalledWith(SoundModuleEvent.CONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.CONNECT);
             });
         });
 
@@ -165,7 +166,7 @@ describe ('SoundModule', function () {
             it('should emit a DISCONNECT event', function() {
                 spyOn(sm,'emit');
                 sm.disconnect();
-                expect(sm.emit).toHaveBeenCalledWith(SoundModuleEvent.DISCONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DISCONNECT);
             });
         });
 
@@ -189,7 +190,7 @@ describe ('SoundModule', function () {
             it('should emit a DESTROY event', function() {
                 spyOn(sm,'emit');
                 sm.destroy();
-                expect(sm.emit).toHaveBeenCalledWith(SoundModuleEvent.DESTROY);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DESTROY);
             });
         });
     });

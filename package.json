@@ -1,6 +1,6 @@
 {
   "name": "sound-modules",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Cole Reed",
   "description": "Higher level interface wrappers for using sound generators",
   "main": "lib/index.js",
