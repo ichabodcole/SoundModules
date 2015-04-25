@@ -1,5 +1,5 @@
-import { NoiseTypes, ColorNoiseModule, ColorNoiseModuleEvent } from '../../lib/modules/color-noise-module';
-import { OmniControl, OmniControlEvent } from 'property-controls';
+import { NoiseTypes, ModuleEvents, ModuleStates, ColorNoiseModule } from '../../lib/index';
+import { ControlEvents, OmniControl } from 'property-controls';
 
 var audioContext = new AudioContext();
 
@@ -14,8 +14,8 @@ describe ('ColorNoiseModule', function() {
                 value: 0.5
             }
         };
-        //sm = new ColorNoiseModule(options);
-        //sm.start();
+        sm = new ColorNoiseModule(audioContext, options);
+        sm.start();
     });
 
     describe ('constructor', function() {
@@ -27,7 +27,7 @@ describe ('ColorNoiseModule', function() {
 
         it ('should set up default values if provided', function () {
             options.volume.value = 0.5;
-            sm = new ColorNoiseModule(audioContext, options);
+            var sm = new ColorNoiseModule(audioContext, options);
             expect(sm.type).toBe('color-noise-module');
             expect(sm.volume.value).toBe(0.5);
         });
@@ -125,7 +125,7 @@ describe ('ColorNoiseModule', function() {
             it('should set the state property to ACTIVE', function() {
                 sm.start();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(ColorNoiseModule.ACTIVE);
+                expect(sm.state).toBe(ModuleStates.ACTIVE);
             });
         });
 
@@ -139,7 +139,7 @@ describe ('ColorNoiseModule', function() {
             it('should set the state property to STOPPED', function() {
                 sm.stop();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(ColorNoiseModule.STOPPED);
+                expect(sm.state).toBe(ModuleStates.STOPPED);
             });
         });
 
@@ -157,7 +157,7 @@ describe ('ColorNoiseModule', function() {
                 var gainNode = sm.audioCtx.createGain();
                 spyOn(sm,'emit');
                 sm.connect(gainNode);
-                expect(sm.emit).toHaveBeenCalledWith(ColorNoiseModuleEvent.CONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.CONNECT);
             });
         });
 
@@ -171,7 +171,7 @@ describe ('ColorNoiseModule', function() {
             it('should emit a DISCONNECT event', function() {
                 spyOn(sm,'emit');
                 sm.disconnect();
-                expect(sm.emit).toHaveBeenCalledWith(ColorNoiseModuleEvent.DISCONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DISCONNECT);
             });
         });
 
@@ -195,7 +195,7 @@ describe ('ColorNoiseModule', function() {
             it('should emit a DESTROY event', function() {
                 spyOn(sm,'emit');
                 sm.destroy();
-                expect(sm.emit).toHaveBeenCalledWith(ColorNoiseModuleEvent.DESTROY);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DESTROY);
             });
         });
     });

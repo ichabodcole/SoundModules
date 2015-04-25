@@ -1,5 +1,5 @@
-import { WaveTypes, BinauralBeatModule, BinauralBeatModuleEvent } from '../../lib/modules/binaural-beat-module';
-import { OmniControl, OmniControlEvent } from 'property-controls';
+import { WaveTypes, ModuleEvents, ModuleStates, BinauralBeatModule } from '../../lib/index';
+import { ControlEvents, OmniControl } from 'property-controls';
 
 var audioContext = new AudioContext();
 
@@ -8,7 +8,6 @@ describe ('BinauralBeatModule', function () {
 
     beforeEach (function () {
         options = {
-            // type: 'sound-module',
             volume: {
                 min: 0,
                 max: 1,
@@ -160,7 +159,7 @@ describe ('BinauralBeatModule', function () {
             it('should set the state property to ACTIVE', function() {
                 sm.start();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(BinauralBeatModule.ACTIVE);
+                expect(sm.state).toBe(ModuleStates.ACTIVE);
             });
         });
 
@@ -168,7 +167,7 @@ describe ('BinauralBeatModule', function () {
             it('should set the state property to STOPPED', function() {
                 sm.stop();
                 expect(sm.state).not.toBe(undefined);
-                expect(sm.state).toBe(BinauralBeatModule.STOPPED);
+                expect(sm.state).toBe(ModuleStates.STOPPED);
             });
         });
 
@@ -186,7 +185,7 @@ describe ('BinauralBeatModule', function () {
                 var gainNode = sm.audioCtx.createGain();
                 spyOn(sm,'emit');
                 sm.connect(gainNode);
-                expect(sm.emit).toHaveBeenCalledWith(BinauralBeatModuleEvent.CONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.CONNECT);
             });
         });
 
@@ -200,7 +199,7 @@ describe ('BinauralBeatModule', function () {
             it('should emit a DISCONNECT event', function() {
                 spyOn(sm,'emit');
                 sm.disconnect();
-                expect(sm.emit).toHaveBeenCalledWith(BinauralBeatModuleEvent.DISCONNECT);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DISCONNECT);
             });
         });
 
@@ -224,7 +223,7 @@ describe ('BinauralBeatModule', function () {
             it('should emit a DESTROY event', function() {
                 spyOn(sm,'emit');
                 sm.destroy();
-                expect(sm.emit).toHaveBeenCalledWith(BinauralBeatModuleEvent.DESTROY);
+                expect(sm.emit).toHaveBeenCalledWith(ModuleEvents.DESTROY);
             });
         });
     });
