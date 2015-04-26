@@ -1,5 +1,5 @@
 import { WaveTypes, ModuleEvents, ModuleStates, BinauralBeatModule } from '../../lib/index';
-import { ControlEvents, OmniControl } from 'property-controls';
+import { ControlEvents, RangeControl } from 'property-controls';
 
 var audioContext = new AudioContext();
 
@@ -126,8 +126,8 @@ describe ('BinauralBeatModule', function () {
                 expect(sm.pitch).toBeDefined();
             });
 
-            it ('should be an OmniControl instance', function() {
-                expect(sm.pitch instanceof OmniControl).toBe(true);
+            it ('should be an RangeControl instance', function() {
+                expect(sm.pitch instanceof RangeControl).toBe(true);
             });
 
             it ('should update the generators pitch value', function() {
@@ -142,8 +142,8 @@ describe ('BinauralBeatModule', function () {
                 expect(sm.beatRate).toBeDefined();
             });
 
-            it ('should be an OmniControl instance', function() {
-                expect(sm.beatRate instanceof OmniControl).toBe(true);
+            it ('should be an RangeControl instance', function() {
+                expect(sm.beatRate instanceof RangeControl).toBe(true);
             });
 
             it ('should update the generators beatRate value', function() {
