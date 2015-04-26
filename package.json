@@ -38,6 +38,6 @@
   "dependencies": {
     "binauralbeatgen": "git://github.com/ichabodcole/BinauralBeatGenJS-ES6",
     "noisegen": "git://github.com/ichabodcole/NoiseGenJS-ES6",
-    "property-controls": "git://github.com/ichabodcole/property-controls"
+    "property-controls": "git://github.com/ichabodcole/PropertyControls.git"
   }
 }
